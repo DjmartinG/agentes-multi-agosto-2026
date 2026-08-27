@@ -1,0 +1,12 @@
+# Normalizar finales de linea a LF en el repo.
+# Critico: CLAUDE.md / AGENTS.md / GEMINI.md deben ser byte a byte identicos
+# en cualquier entorno (Windows, Linux, macOS). Sin esto, un checkout en
+# otro SO puede introducir diferencias de CRLF y romper la verificacion.
+* text=auto eol=lf
+
+# Binarios: nunca tocar
+*.png binary
+*.jpg binary
+*.pdf binary
+*.xlsx binary
+*.docx binary

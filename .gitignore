@@ -1,0 +1,25 @@
+# Archivos intermedios — siempre regenerables, nunca versionados
+.tmp/*
+!.tmp/.gitkeep
+
+# Secretos y credenciales
+.env
+credentials.json
+token.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# SO / editores
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/
+
+# Claude Code (config local de maquina, no del proyecto)
+.claude/settings.local.json
