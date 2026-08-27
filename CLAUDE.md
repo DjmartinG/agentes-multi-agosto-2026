@@ -19,6 +19,10 @@
 
 ### Registro de aprendizajes
 
+- **2026-08-26 — [Git: `.tmp/` no permite re-incluir hijos]:** Ignorar un directorio con `.tmp/` hace imposible re-incluir archivos adentro — Git no re-incluye un archivo si su directorio padre está excluido, así que `!.tmp/.gitkeep` se ignora en silencio. La forma correcta es `.tmp/*` seguido de `!.tmp/.gitkeep`. **Por qué importa:** con la regla mal escrita la carpeta `.tmp/` desaparece en cualquier clon nuevo y los scripts fallan al escribir su salida antes de llegar a `mkdir`. Verificar siempre con `git check-ignore -q <ruta>` en vez de asumir.
+
+- **2026-08-26 — [EOL: `.gitattributes` protege la sincronía de los 3 archivos]:** En Windows, Git convierte LF↔CRLF al hacer checkout. Como la regla de sincronización exige que `CLAUDE.md`, `AGENTS.md` y `GEMINI.md` sean byte a byte iguales, un checkout en otro SO podía romper la verificación sin que nadie tocara el contenido. Se fijó `* text=auto eol=lf` en `.gitattributes`. **Por qué importa:** al comparar los tres archivos, usar `sha256sum` sobre el working tree y no fiarse del diff de Git — Git normaliza y puede mostrar "sin cambios" mientras los bytes en disco difieren.
+
 - **2026-08-26 — [Entorno: Windows + rutas con espacios]:** El workspace vive en `C:\Code\AGENTES  MULTI   AGOSTO 2026` (dobles y triples espacios en el nombre) sobre Windows 11 con PowerShell 7 como shell principal. Toda ruta debe ir entrecomillada en scripts y comandos; en Bash/Git Bash el path equivalente es `/c/Code/AGENTES  MULTI   AGOSTO 2026`. **Por qué importa:** los scripts de `execution/` que construyan rutas por concatenación sin comillas fallarán silenciosamente o apuntarán al directorio equivocado — usar siempre `pathlib.Path` y nunca `os.system` con strings crudos.
 
 <!-- Agrega nuevas entradas arriba de esta línea. -->
