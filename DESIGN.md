@@ -1,56 +1,67 @@
 # DESIGN.md
 
-## Estrategia de color: Committed
+Sistema vigente: **CG — Experimentos Diseños, v1.0 (agosto 2026)**.
 
-Un solo color saturado carga el 30 a 60% de la superficie: **naranja de seguridad
-industrial**, el color del casco y del chaleco reflectivo. Elegido porque Martín viene de
-construcción y porque es literalmente el color de las cosas que se están construyendo.
-Referencia nombrada: un drench tipo Klim, pero en naranja de obra sobre grafito.
+Este archivo ya no describe una propuesta propia. Los tokens de abajo son copia
+literal del sistema de la marca. Toda decisión visual sale de aquí; ningún color
+suelto en el código.
 
-Rechazado a propósito: verde neón sobre negro (reflejo de primer orden para "IA") y
-crema con terracota (reflejo de segundo orden, estética editorial).
+Valores declarados por el sistema: *diseño con sentido · claridad visual · calma ·
+respaldo humano*.
 
-Neutros tintados hacia el naranja, nunca grises puros. Sin #000 ni #fff.
+## Color
 
 ```
---pitch  oklch(0.13 0.010 55)   fondo profundo
---void   oklch(0.17 0.013 55)   fondo base
---raise  oklch(0.22 0.015 55)   superficie elevada
---line   oklch(0.32 0.018 55)   filetes
---bone   oklch(0.95 0.008 75)   texto principal
---dim    oklch(0.72 0.014 65)   texto secundario
---faint  oklch(0.56 0.014 60)   etiquetas
---hi     oklch(0.70 0.190 45)   naranja de obra
---hi-deep oklch(0.56 0.165 42)  naranja presionado
+--cg-cream #F7F1E5   --cg-sand  #EFE4D2   --cg-beige #E8D9C1   --cg-white #FFFFFF
+--cg-orange #E39A54  --cg-orange-soft #EDBB85  --cg-sienna #A8502E
+--cg-olive  #6E7147  --cg-olive-soft  #9A9C6E  --cg-warm-gray #8C8175
+--cg-ink    #362E25  --cg-ink-soft    #6E6155  --cg-line   #E2D6C1
 ```
 
-## Tema
+Proporciones de uso que fija el sistema: crema 44%, arena 18%, beige 14%,
+naranja 12%, oliva 8%, sienna 4%. El crema domina; el naranja y el sienna son
+acentos, no fondos.
 
-Compromiso deliberado con **un solo mundo visual oscuro**. Escena: alguien en el sofá,
-de noche, con el celular, decidiendo si el domingo vale la pena. Todo color se pinta
-explícitamente, sin depender del tema del visor.
+### Restricciones de contraste (medidas, no estimadas)
+
+Estas dos reglas no están en el sistema pero se derivan de él y son obligatorias:
+
+- **`--cg-orange` no se usa nunca como texto.** Da 2.07 sobre crema y 2.33 sobre
+  blanco, muy por debajo del mínimo AA de 4.5. Falla incluso en texto grande.
+  Su lugar es el relleno: botones, barras, marcas. El texto de acento va en
+  **sienna** (4.85 sobre crema). Sobre relleno naranja, el texto va en tinta (5.73).
+- **`--cg-warm-gray` solo cumple en texto grande** (3.39 sobre crema). Las
+  etiquetas pequeñas usan `--text-muted` (5.33).
+
+Pares seguros de un vistazo: tinta/crema 11.86 · tinta-suave/crema 5.33 ·
+sienna/crema 4.85 · oliva/crema 4.54 · crema/sienna 4.85 · tinta/naranja 5.73.
+
+### Semántica
+
+Error y alerta en **sienna**. Éxito y confirmación en **oliva**. Acento y
+llamada a la acción en **naranja**. Nunca color solo: cada estado lleva también
+su palabra.
 
 ## Tipografía
 
-Familia única con contraste extremo de ancho y peso, en vez de un par display + body tímido.
+- **Títulos:** Newsreader SemiBold (600)
+- **Subtítulos y entradillas:** Newsreader Italic
+- **Cuerpo:** Hanken Grotesk Regular
+- **Código:** el sistema no define monoespaciada. Se usa la del sistema operativo
+  (`ui-monospace, SFMono-Regular, Menlo, Consolas`) en vez de importar una tercera
+  familia que compita con las dos de la marca.
 
-- **Archivo** (variable, ejes wdth 62 a 125 y wght 400 a 900). Expandida y pesada para
-  titulares, normal para lectura. Grotesca de señalética industrial: es la letra de un
-  manifiesto de equipo, no de una revista.
-- **Azeret Mono** solo para números de paso, etiquetas de dato y el bloque del prompt,
-  donde el monoespaciado es literalmente correcto porque es código.
+## Forma y profundidad
 
-Rechazadas por reflejo: Inter, Space Grotesk, IBM Plex, Newsreader, Fraunces.
+Radios 6 / 12 / 20 / 32 / píldora. Sombras suaves en tres pasos.
+Transición `240ms cubic-bezier(.2,.6,.2,1)`.
 
-Escala fluida con clamp(), razón mínima 1.25 entre pasos.
+## Reglas propias del proyecto
 
-## Layout
-
-Rejilla estricta y visible como voz, no composición asimétrica. Filetes de un píxel que
-se ven, estaciones numeradas, alineación a línea base compartida. La página se lee como
-un documento de obra: ordenado, medido, con consecuencia.
-
-## Movimiento
-
-Una sola secuencia de entrada escalonada. Curvas ease-out exponenciales, sin rebote.
-Respeta prefers-reduced-motion.
+- **Altura táctil mínima 44px**, fijada con `min-height`, no por suma de padding.
+  El público objetivo lee en celular.
+- **Tema único claro.** El sistema declara `color-scheme:light`; todo color se
+  pinta explícito, sin depender del tema del visor.
+- **Nada puede quedar invisible.** Lo que se revela al hacer scroll arranca en
+  opacidad cero; si `IntersectionObserver` no dispara, un temporizador de 2,5s
+  lo muestra igual.
