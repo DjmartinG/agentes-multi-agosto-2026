@@ -209,6 +209,127 @@
     .rise { animation: none; opacity: 1; transform: none; }
     .bar i { transition: none; }
   }
+
+  :root {
+    --bad: oklch(0.64 0.185 16);
+    --q4:  cubic-bezier(0.25, 1, 0.5, 1);
+    --q5:  cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* ---------- Revelado al hacer scroll ---------- */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .8s var(--q5), transform .8s var(--q5); }
+  .reveal.seen { opacity: 1; transform: none; }
+  .reveal.d1 { transition-delay: .08s; }
+  .reveal.d2 { transition-delay: .16s; }
+  .reveal.d3 { transition-delay: .24s; }
+
+  /* ---------- Calculadora de probabilidad ---------- */
+  .calc { margin-top: 34px; border: 1px solid var(--line); background: var(--pitch); }
+  .calc-head { padding: 20px clamp(18px, 3vw, 28px) 0; }
+  .calc-q { font-family: "Azeret Mono", monospace; font-size: 10.5px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--faint); margin: 0 0 14px; }
+
+  .slider-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .slider-row output { font-family: "Azeret Mono", monospace; font-size: 13px; color: var(--hi);
+    font-variant-numeric: tabular-nums; min-width: 8ch; font-weight: 600; }
+
+  input[type="range"] {
+    -webkit-appearance: none; appearance: none; flex: 1 1 200px; min-width: 160px;
+    height: 26px; background: transparent; cursor: pointer; margin: 0;
+  }
+  input[type="range"]::-webkit-slider-runnable-track {
+    height: 2px; background: var(--line); border-radius: 0;
+  }
+  input[type="range"]::-moz-range-track { height: 2px; background: var(--line); }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 18px; height: 18px; margin-top: -8px; border-radius: 50%;
+    background: var(--hi); border: 0; cursor: grab;
+    transition: transform .18s var(--q4);
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 18px; height: 18px; border-radius: 50%; background: var(--hi); border: 0; cursor: grab;
+  }
+  input[type="range"]:hover::-webkit-slider-thumb { transform: scale(1.18); }
+  input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.05); cursor: grabbing; }
+  input[type="range"]:focus-visible::-webkit-slider-thumb { outline: 2px solid var(--bone); outline-offset: 3px; }
+
+  .readout { display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap;
+    padding: 26px clamp(18px, 3vw, 28px) 4px; }
+  .big {
+    font-variation-settings: "wdth" 120, "wght" 800;
+    font-size: clamp(3.6rem, 15vw, 7rem); line-height: .84; letter-spacing: -.04em;
+    color: var(--hi); font-variant-numeric: tabular-nums;
+  }
+  .big-note { color: var(--dim); font-size: .95rem; max-width: 30ch; padding-bottom: 8px; }
+
+  .plot { display: flex; align-items: flex-end; gap: 2px; height: 108px;
+    padding: 22px clamp(18px, 3vw, 28px) 0; }
+  .plot .col { flex: 1; display: flex; flex-direction: column; justify-content: flex-end;
+    height: 100%; min-width: 0; }
+  .plot .stalk {
+    background: var(--hi); border-radius: 4px 4px 0 0; transform-origin: bottom;
+    transform: scaleY(0); transition: transform .55s var(--q5), opacity .35s var(--q4);
+    height: 100%; opacity: .18;
+  }
+  .plot .col.on .stalk { opacity: 1; }
+  .axis { display: flex; gap: 2px; padding: 8px clamp(18px, 3vw, 28px) 22px;
+    font-family: "Azeret Mono", monospace; font-size: 9.5px; color: var(--faint);
+    font-variant-numeric: tabular-nums; }
+  .axis span { flex: 1; text-align: center; min-width: 0; }
+  .axis span.on { color: var(--hi); }
+
+  .calc-foot { border-top: 1px solid var(--line); padding: 16px clamp(18px, 3vw, 28px);
+    color: var(--dim); font-size: .93rem; }
+  .calc-foot b { color: var(--bone); font-weight: 600; }
+
+  /* ---------- Consola del agente ---------- */
+  .term { margin-top: 34px; border: 1px solid var(--line); background: var(--pitch); }
+  .term-head { display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    padding: 13px 16px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .term-head span { font-family: "Azeret Mono", monospace; font-size: 10.5px;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
+  .replay { font-family: "Azeret Mono", monospace; font-size: 11px; letter-spacing: .1em;
+    text-transform: uppercase; background: transparent; color: var(--hi);
+    border: 1px solid var(--hi); padding: 8px 14px; cursor: pointer; font-weight: 600;
+    transition: background .22s var(--q4), color .22s var(--q4); }
+  .replay:hover { background: var(--hi); color: var(--pitch); }
+  .replay:focus-visible { outline: 2px solid var(--bone); outline-offset: 3px; }
+
+  .term-body { padding: 20px 18px; font-family: "Azeret Mono", monospace;
+    font-size: 12.5px; line-height: 1.95; min-height: 330px; overflow-x: auto; }
+  @media (max-width: 560px) { .term-body { font-size: 11px; min-height: 300px; } }
+
+  .ln { display: block; opacity: 0; transform: translateY(6px);
+    transition: opacity .4s var(--q4), transform .4s var(--q4); white-space: pre-wrap; }
+  .ln.in { opacity: 1; transform: none; }
+  .ln .tag { display: inline-block; min-width: 8ch; color: var(--faint); }
+  .ln.you { color: var(--bone); }
+  .ln.you .tag { color: var(--hi); }
+  .ln.err { color: var(--bad); }
+  .ln.err .tag { color: var(--bad); font-weight: 600; }
+  .ln.win { color: var(--hi); }
+  .ln.win .tag { color: var(--hi); font-weight: 600; }
+  .ln.note { color: var(--bone); background: oklch(0.22 0.045 45); padding: 3px 8px; margin-top: 6px; }
+  .ln.dim { color: var(--dim); }
+
+  .caret { display: inline-block; width: 8px; height: 1em; background: var(--hi);
+    vertical-align: -2px; animation: blink 1.1s steps(2, start) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ---------- Trazado del diagrama ---------- */
+  .draw { stroke-dasharray: var(--len); stroke-dashoffset: var(--len);
+    transition: stroke-dashoffset 1s var(--q5); }
+  figure.seen .draw { stroke-dashoffset: 0; }
+  figure.seen .draw.late { transition-delay: .5s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .ln { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .plot .stalk { transition: none; }
+    .caret { animation: none; }
+    .draw { stroke-dashoffset: 0 !important; transition: none; }
+  }
+
 </style>
 
 <div class="hero">
@@ -238,8 +359,8 @@
 <section>
   <div class="frame">
     <p class="kicker">Por qu&eacute; importa</p>
-    <h2>La diferencia entre pedir y encargar</h2>
-    <div class="thesis">
+    <h2 class="reveal">La diferencia entre pedir y encargar</h2>
+    <div class="thesis reveal d1">
       <div>
         <b>Lo que tienes hoy</b>
         <p>Le pides algo a una IA y te devuelve texto. El trabajo sigue siendo tuyo:
@@ -252,18 +373,62 @@
       </div>
       <div>
         <b>Por qu&eacute; no lo hace ya</b>
-        <p>Porque nadie le dio estructura. Con 90% de acierto por paso, en cinco pasos
-        acierta el 59% de las veces. Eso se arregla con arquitectura, no con m&aacute;s inteligencia.</p>
+        <p>Porque nadie le dio estructura. Los errores no se suman, se multiplican.
+        Mu&eacute;velo t&uacute; mismo aqu&iacute; abajo.</p>
       </div>
     </div>
+
+<div class="calc reveal">
+  <div class="calc-head">
+    <p class="calc-q">Muévelo: ¿cuántos pasos tiene la tarea que le encargas?</p>
+    <div class="slider-row">
+      <input type="range" id="steps" min="1" max="12" value="5" step="1"
+             aria-label="Número de pasos de la tarea">
+      <output id="stepsOut" for="steps">5 pasos</output>
+    </div>
+  </div>
+
+  <div class="readout">
+    <div class="big" id="odds">59%</div>
+    <p class="big-note">de probabilidad de que la tarea completa salga bien a la primera.</p>
+  </div>
+
+  <div class="plot" id="plot" role="img"
+       aria-label="La probabilidad de éxito cae de 90 por ciento en un paso a 28 por ciento en doce pasos."></div>
+  <div class="axis" id="axis"></div>
+
+  <p class="calc-foot">
+    Suponiendo un agente que acierta el <b>90% en cada paso</b>, que ya es optimista.
+    Los errores no se suman: se multiplican. Por eso una IA suelta te sirve para
+    redactar un correo y te falla en cualquier proceso real de tu empresa.
+  </p>
+</div>
+  </div>
+</section>
+
+<section>
+  <div class="frame">
+    <p class="kicker">Un agente en acci&oacute;n</p>
+    <h2 class="reveal">Lo interesante pasa cuando falla</h2>
+    <p class="sub reveal d1">
+      Esto no es un video: es la secuencia real de lo que hace un agente bien montado
+      cuando algo le sale mal. F&iacute;jate en la &uacute;ltima l&iacute;nea, que es la que lo cambia todo.
+    </p>
+<div class="term reveal">
+  <div class="term-head">
+    <span>Lo que pasa por dentro &middot; caso real</span>
+    <button class="replay" id="replay">Ver de nuevo</button>
+  </div>
+  <div class="term-body" id="tbody" aria-live="polite"></div>
+</div>
   </div>
 </section>
 
 <section>
   <div class="frame">
     <p class="kicker">Antes de llegar</p>
-    <h2>Tres cosas, en este orden</h2>
-    <p class="sub">
+    <h2 class="reveal">Tres cosas, en este orden</h2>
+    <p class="sub reveal d1">
       Si llegamos a instalar en vivo se nos va la hora entera en eso. Hazlo con calma
       cualquier d&iacute;a de esta semana, no el domingo a las 9:55.
     </p>
@@ -273,7 +438,7 @@
       <div class="bar"><i id="fill"></i></div>
     </div>
 
-    <div class="stations">
+    <div class="stations reveal d2">
       <div class="st">
         <div class="st-n">01</div>
         <div class="st-b">
@@ -334,7 +499,7 @@
       </div>
     </div>
 
-    <div class="proof">
+    <div class="proof reveal">
       <h3>La prueba de los 30 segundos</h3>
       <p>H&aacute;zla el s&aacute;bado. Si esto funciona, est&aacute;s listo y no tienes que hacer nada m&aacute;s.
       Abre la app de Claude, inicia sesi&oacute;n y escr&iacute;bele exactamente esto:</p>
@@ -351,14 +516,14 @@
 <section>
   <div class="frame">
     <p class="kicker">Las tres llaves</p>
-    <h2>Con esto el agente sale de tu computador</h2>
-    <p class="sub">
+    <h2 class="reveal">Con esto el agente sale de tu computador</h2>
+    <p class="sub reveal d1">
       Las cuentas son gratis y se abren con tu correo de Google en menos de un minuto cada una.
       Si alcanzas, &aacute;brelas antes. Si no, las hacemos juntos en vivo: ninguna es indispensable
       para seguir la clase.
     </p>
 
-    <div class="keys">
+    <div class="keys reveal d2">
       <div class="key">
         <div>
           <h3>GitHub</h3>
@@ -393,8 +558,8 @@
 <section>
   <div class="frame">
     <p class="kicker">El m&eacute;todo</p>
-    <h2>Tres capas, una sola idea</h2>
-    <p class="sub">
+    <h2 class="reveal">Tres capas, una sola idea</h2>
+    <p class="sub reveal d1">
       Se separa <em>qu&eacute; hay que hacer</em> de <em>qui&eacute;n decide</em> y de <em>qui&eacute;n ejecuta</em>.
       Nadie quiere que el jefe de obra ponga los ladrillos a ojo.
     </p>
@@ -450,7 +615,7 @@
         <text x="490" y="177" text-anchor="middle" font-family="'Azeret Mono', monospace" font-size="9.5"
               fill="currentColor">devuelve el error</text>
 
-        <path d="M 320 136 L 320 228 L 100 228 L 100 140" fill="none" stroke="oklch(0.70 0.190 45)"
+        <path class="draw late" style="--len:440" d="M 320 136 L 320 228 L 100 228 L 100 140" fill="none" stroke="oklch(0.70 0.190 45)"
               stroke-width="1.5" marker-end="url(#pt-hi)"></path>
         <text x="210" y="221" text-anchor="middle" font-family="'Azeret Mono', monospace" font-size="9.5"
               fill="oklch(0.70 0.190 45)">anota lo aprendido</text>
@@ -470,14 +635,14 @@
 <section>
   <div class="frame">
     <p class="kicker">Lo que te llevas</p>
-    <h2>El sistema completo, para que lo uses</h2>
-    <p class="sub">
+    <h2 class="reveal">El sistema completo, para que lo uses</h2>
+    <p class="sub reveal d1">
       Este es el texto que le pegas a Claude para que te construya todo el andamiaje solo:
       las carpetas, los archivos de instrucciones y la memoria donde va guardando lo que
       aprende. No hace falta que lo entiendas hoy. Gu&aacute;rdalo.
     </p>
 
-    <div class="vault">
+    <div class="vault reveal d1">
       <div class="vault-top">
         <span>Prompt DOE &middot; p&eacute;galo en Claude</span>
         <button class="copy" id="cp">Copiar</button>
@@ -577,8 +742,8 @@ Se pragmático. Se confiable. Auto-corríjete.</pre>
 <section>
   <div class="frame">
     <p class="kicker">La hora</p>
-    <h2>Qu&eacute; va a pasar el domingo</h2>
-    <div class="run">
+    <h2 class="reveal">Qu&eacute; va a pasar el domingo</h2>
+    <div class="run reveal d1">
       <div><time>9:30</time><div><h4>Sala de auxilio</h4>
         <p>Abro media hora antes por si algo no te qued&oacute; instalado. Opcional.
         Peor que llegar sin instalar es no llegar.</p></div></div>
@@ -599,8 +764,8 @@ Se pragmático. Se confiable. Auto-corríjete.</pre>
 <section class="last">
   <div class="frame">
     <p class="kicker">Si algo se traba</p>
-    <h2>Escr&iacute;beme, no te quedes callado</h2>
-    <p class="sub">
+    <h2 class="reveal">Escr&iacute;beme, no te quedes callado</h2>
+    <p class="sub reveal d1">
       Es normal que algo no salga a la primera. Cu&eacute;ntame qu&eacute; paso ibas haciendo y qu&eacute; te
       apareci&oacute; en pantalla. Una captura de pantalla es lo m&aacute;s &uacute;til de todo. Lo resolvemos
       por chat durante la semana, sin apuros.
@@ -670,4 +835,176 @@ Se pragmático. Se confiable. Auto-corríjete.</pre>
       } else { fallback(); }
     });
   })();
+</script>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Todo lo que se anima arranca invisible. Si IntersectionObserver no dispara
+  // (pestana en segundo plano, navegador viejo, ahorro de energia), la pagina
+  // llegaria en blanco. Este temporizador garantiza que SIEMPRE se vea.
+  var redDeSeguridad = setTimeout(function () { muestraTodo(); }, 2500);
+  function muestraTodo() {
+    clearTimeout(redDeSeguridad);
+    var n = document.querySelectorAll('.reveal, figure');
+    Array.prototype.forEach.call(n, function (el) { el.classList.add('seen'); });
+    if (typeof alza === 'function') { alza(); }
+    if (typeof reproduce === 'function') { reproduce(); }
+  }
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) { muestraTodo(); }
+  });
+
+  /* ---------- Revelado al entrar en pantalla ---------- */
+  var targets = document.querySelectorAll('.reveal, figure');
+  if (!('IntersectionObserver' in window) || reduce) {
+    Array.prototype.forEach.call(targets, function (n) { n.classList.add('seen'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    Array.prototype.forEach.call(targets, function (n) { io.observe(n); });
+  }
+
+  /* ---------- Calculadora de probabilidad ---------- */
+  var MAX = 12, ACIERTO = 0.9;
+  var slider = document.getElementById('steps');
+  var out = document.getElementById('stepsOut');
+  var odds = document.getElementById('odds');
+  var plot = document.getElementById('plot');
+  var axis = document.getElementById('axis');
+  var stalks = [], ticks = [];
+
+  for (var i = 1; i <= MAX; i++) {
+    var col = document.createElement('div');
+    col.className = 'col';
+    var s = document.createElement('div');
+    s.className = 'stalk';
+    s.style.transitionDelay = (i * 32) + 'ms';
+    col.appendChild(s);
+    plot.appendChild(col);
+    stalks.push({ col: col, bar: s, p: Math.pow(ACIERTO, i) });
+
+    var t = document.createElement('span');
+    t.textContent = i;
+    axis.appendChild(t);
+    ticks.push(t);
+  }
+
+  var raf = null, guarda = null;
+  function anima(desde, hasta) {
+    var destino = Math.round(hasta * 100) + '%';
+    if (reduce || typeof requestAnimationFrame !== 'function') { odds.textContent = destino; return; }
+    var t0 = performance.now(), dur = 380;
+    if (raf) { cancelAnimationFrame(raf); }
+    // Red de seguridad: si rAF no corre (pestana oculta, ahorro de bateria),
+    // el numero igual aterriza en el valor correcto.
+    clearTimeout(guarda);
+    guarda = setTimeout(function () { odds.textContent = destino; }, dur + 90);
+    (function tick(now) {
+      var k = Math.min(1, (now - t0) / dur);
+      var e = 1 - Math.pow(1 - k, 4);
+      odds.textContent = Math.round((desde + (hasta - desde) * e) * 100) + '%';
+      if (k < 1) { raf = requestAnimationFrame(tick); }
+      else { clearTimeout(guarda); }
+    })(t0);
+  }
+
+  var previo = Math.pow(ACIERTO, 5);
+  function pinta(n, animar) {
+    out.textContent = n + (n === 1 ? ' paso' : ' pasos');
+    var p = Math.pow(ACIERTO, n);
+    if (animar) { anima(previo, p); } else { odds.textContent = Math.round(p * 100) + '%'; }
+    previo = p;
+    stalks.forEach(function (o, idx) {
+      o.col.classList.toggle('on', idx < n);
+      ticks[idx].classList.toggle('on', idx < n);
+    });
+  }
+
+  function alza() { stalks.forEach(function (o) { o.bar.style.transform = 'scaleY(' + o.p + ')'; }); }
+
+  slider.addEventListener('input', function () { pinta(parseInt(slider.value, 10), true); });
+  pinta(5, false);
+
+  if (reduce) { alza(); }
+  else if ('IntersectionObserver' in window) {
+    var io2 = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { alza(); io2.disconnect(); } });
+    }, { threshold: 0.25 });
+    io2.observe(plot);
+  } else { alza(); }
+
+  /* ---------- Consola del agente ---------- */
+  var GUION = [
+    { c: 'you',  tag: 'tú',      t: 'Sácame los precios de 20 productos de esta página y déjamelos en un Excel.' },
+    { c: 'dim',  tag: 'lee',     t: 'directives/scrape_website.md' },
+    { c: 'dim',  tag: 'escribe', t: 'execution/scrape_precios.py' },
+    { c: 'dim',  tag: 'corre',   t: 'python execution/scrape_precios.py' },
+    { c: 'err',  tag: 'error',   t: 'HTTP 429 · la página bloquea por exceso de peticiones' },
+    { c: 'dim',  tag: '',        t: 'Leo el error. El sitio solo permite 5 peticiones por minuto.' },
+    { c: 'dim',  tag: 'corrige', t: 'execution/scrape_precios.py · lotes de 5 con pausa' },
+    { c: 'dim',  tag: 'corre',   t: 'python execution/scrape_precios.py' },
+    { c: 'win',  tag: 'listo',   t: '20 productos → .tmp/precios.xlsx' },
+    { c: 'note', tag: '',        t: 'Anota en CLAUDE.md → «Límite real del sitio: 5 peticiones por minuto. Por qué importa: usar lotes desde el primer intento.»' }
+  ];
+
+  var tbody = document.getElementById('tbody');
+  var replay = document.getElementById('replay');
+  var timers = [], corriendo = false;
+
+  function limpia() { timers.forEach(clearTimeout); timers = []; tbody.innerHTML = ''; }
+
+  function reproduce() {
+    if (corriendo) { return; }
+    corriendo = true;
+    limpia();
+
+    GUION.forEach(function (paso, i) {
+      var ln = document.createElement('span');
+      ln.className = 'ln ' + paso.c;
+      if (paso.tag) {
+        var tg = document.createElement('span');
+        tg.className = 'tag';
+        tg.textContent = paso.tag + '  ';
+        ln.appendChild(tg);
+      } else {
+        var sp = document.createElement('span');
+        sp.className = 'tag';
+        sp.textContent = '';
+        ln.appendChild(sp);
+      }
+      ln.appendChild(document.createTextNode(paso.t));
+      tbody.appendChild(ln);
+
+      if (reduce) { ln.classList.add('in'); return; }
+      // Pausa mas larga antes del error y antes del aprendizaje: ahi esta el golpe
+      var base = 380;
+      var espera = i * base + (i >= 4 ? 420 : 0) + (i >= 9 ? 620 : 0);
+      timers.push(setTimeout(function () {
+        ln.classList.add('in');
+        if (i === GUION.length - 1) {
+          corriendo = false;
+          var cur = document.createElement('span');
+          cur.className = 'caret';
+          tbody.appendChild(cur);
+        }
+      }, espera));
+    });
+    if (reduce) { corriendo = false; }
+  }
+
+  replay.addEventListener('click', reproduce);
+
+  if (reduce) { reproduce(); }
+  else if ('IntersectionObserver' in window) {
+    var io3 = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { reproduce(); io3.disconnect(); } });
+    }, { threshold: 0.3 });
+    io3.observe(tbody);
+  } else { reproduce(); }
+})();
 </script>
