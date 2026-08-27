@@ -1,40 +1,44 @@
 <title>Ponla a Trabajar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Hanken+Grotesk:wght@300..800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Lato:wght@400;700&display=swap">
 
 <style>
   /* ═══════════════════════════════════════════════════════════════
-     CG — Experimentos Diseños · v1.0
-     Tokens copiados literalmente del sistema. Ningún color suelto.
-     Corrección de accesibilidad verificada:
-       --cg-orange como TEXTO da 2.07 sobre crema (falla AA).
-       Se usa solo en rellenos y marcas; el texto de acento va en sienna (4.85).
-       --cg-warm-gray solo cumple en texto grande (3.39); las etiquetas
-       pequeñas usan --text-muted (5.33).
+     NATURA · Diseño con propósito · v1.0
+     Paleta y proporciones copiadas del sistema. Diseño con sentido,
+     claridad visual, armonía, conexión humana.
+
+     Dos derivaciones necesarias, medidas contra el crema #F3EDE2:
+       1. La paleta NO trae color de texto. El naranja da 2.00, la
+          arena 1.49, el gris 3.23 y el oliva 4.46: ninguno alcanza
+          el mínimo de 4.5. Se deriva --ink #2E2F1F (oliva muy
+          oscuro, 11.68) respetando el matiz de la marca.
+       2. El naranja nunca es texto; vive en rellenos e ilustración.
+          El texto de acento va en sienna (4.56).
      ═══════════════════════════════════════════════════════════════ */
   :root {
-    --cg-cream:#F7F1E5; --cg-white:#FFFFFF; --cg-sand:#EFE4D2; --cg-beige:#E8D9C1;
-    --cg-orange:#E39A54; --cg-orange-soft:#EDBB85; --cg-sienna:#A8502E;
-    --cg-olive:#6E7147; --cg-olive-soft:#9A9C6E; --cg-warm-gray:#8C8175;
-    --cg-ink:#362E25; --cg-ink-soft:#6E6155; --cg-line:#E2D6C1;
+    --na-cream:#F3EDE2; --na-sand:#D6C2A1; --na-orange:#E39A52;
+    --na-sienna:#A3572B; --na-olive:#6E6F4B; --na-gray:#8D8274;
+    --na-white:#FFFFFF;
+    --na-ink:#2E2F1F; --na-ink-soft:#55563C;
 
-    --surface-page:var(--cg-cream); --surface-card:var(--cg-white);
-    --surface-alt:var(--cg-beige);  --surface-sand:var(--cg-sand);
-    --text-strong:var(--cg-ink);    --text-muted:var(--cg-ink-soft);
-    --accent:var(--cg-orange);      --accent-strong:var(--cg-sienna);
-    --support:var(--cg-olive);      --support-soft:var(--cg-olive-soft);
-    --border:var(--cg-line);        --border-strong:var(--cg-warm-gray);
-    --link:var(--cg-sienna);        --link-hover:var(--cg-orange);
+    --surface-page:var(--na-cream); --surface-card:var(--na-white);
+    --surface-alt:var(--na-sand);   --surface-sand:#EDE4D6;
+    --text-strong:var(--na-ink);    --text-muted:var(--na-ink-soft);
+    --accent:var(--na-orange);      --accent-strong:var(--na-sienna);
+    --support:var(--na-olive);      --support-soft:var(--na-gray);
+    --border:#E0D5C3;               --border-strong:var(--na-gray);
+    --link:var(--na-sienna);        --link-hover:var(--na-olive);
 
-    --font-display:'Newsreader',Georgia,'Times New Roman',serif;
-    --font-body:'Hanken Grotesk',system-ui,-apple-system,sans-serif;
+    --font-display:'Montserrat',system-ui,-apple-system,sans-serif;
+    --font-body:'Lato','Helvetica Neue',system-ui,sans-serif;
     --font-code:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 
     --radius-xs:6px; --radius-sm:12px; --radius-md:20px; --radius-lg:32px; --radius-pill:999px;
-    --shadow-sm:0 2px 8px rgba(54,46,37,.06);
-    --shadow-md:0 12px 34px rgba(54,46,37,.10);
-    --shadow-lg:0 24px 60px rgba(54,46,37,.12);
+    --shadow-sm:0 2px 8px rgba(46,47,31,.06);
+    --shadow-md:0 12px 34px rgba(46,47,31,.10);
+    --shadow-lg:0 24px 60px rgba(46,47,31,.12);
     --ease:cubic-bezier(.2,.6,.2,1); --dur:240ms;
   }
 
@@ -82,7 +86,7 @@
   }
 
   .lede {
-    font-family: var(--font-display); font-style: italic; font-weight: 400;
+    font-family: var(--font-display); font-weight: 500;
     max-width: 44ch; color: var(--text-muted);
     font-size: clamp(1.12rem, 2.4vw, 1.38rem); line-height: 1.5; margin: 26px 0 0;
   }
@@ -117,7 +121,7 @@
     letter-spacing: -.016em; margin: 18px 0 0; text-wrap: balance; color: var(--text-strong);
   }
   .sub {
-    font-family: var(--font-display); font-style: italic;
+    font-family: var(--font-display); font-weight: 500;
     color: var(--text-muted); max-width: 56ch; margin: 14px 0 0;
     font-size: 1.1rem; line-height: 1.55;
   }
@@ -331,7 +335,7 @@
   figure { margin: 32px 0 0; }
   figure svg { width: 100%; height: auto; display: block; color: var(--text-muted); }
   figcaption { font-size: .92rem; color: var(--text-muted); margin-top: 16px; max-width: 60ch;
-    font-family: var(--font-display); font-style: italic; }
+    font-family: var(--font-display); font-weight: 500; }
 
   /* ===== PROMPT ===== */
   .vault { border: 1px solid var(--border); border-radius: var(--radius-md);
@@ -393,10 +397,27 @@
     .caret { animation: none; }
     .draw { stroke-dashoffset: 0 !important; transition: none; }
   }
+
+
+  /* ===== ILUSTRACIONES NATURA ===== */
+  .ilus { display: block; width: 100%; height: auto; }
+  .ilus-hero { max-width: 330px; margin-left: auto; }
+  @media (max-width: 780px) { .ilus-hero { max-width: 250px; margin: 8px auto 0; } }
+
+  .hero-fila { display: grid; grid-template-columns: 1fr auto; gap: clamp(20px, 4vw, 56px);
+    align-items: center; }
+  @media (max-width: 780px) { .hero-fila { grid-template-columns: 1fr; } }
+
+  .key-ilus { width: 118px; flex: none; }
+  @media (max-width: 620px) { .key-ilus { width: 96px; } }
+  .key { grid-template-columns: auto 1fr auto; }
+  @media (max-width: 620px) { .key { grid-template-columns: auto 1fr; } .key .link { grid-column: 1 / -1; } }
 </style>
 
 <div class="hero">
   <div class="frame">
+    <div class="hero-fila">
+      <div>
     <p class="kicker rise" style="animation-delay:.05s">Domingo 30 de agosto &middot; 10:00 a.m. &middot; Manizales</p>
     <h1 class="rise" style="animation-delay:.13s">
       <span class="off">No vamos a hablar</span>
@@ -416,6 +437,74 @@
       <div><dt>Prepararse toma</dt><dd>25 min<b>Una sola vez</b></dd></div>
       <div><dt>Plazo</dt><dd>S&aacute;bado 29<b>No el domingo</b></dd></div>
     </dl>
+      </div>
+      <div class="rise" style="animation-delay:.4s">
+<svg class="ilus ilus-hero" viewBox="0 0 340 420" role="img"
+     aria-label="Figura geométrica de una persona mirando por un catalejo hacia lo alto, con un brote de planta a sus pies.">
+  <defs>
+    <clipPath id="h-torso"><path d="M 118 154 Q 152 138 186 154 L 184 234 L 120 234 Z"/></clipPath>
+    <clipPath id="h-pi"><path d="M 124 232 L 150 232 L 148 358 L 126 358 Z"/></clipPath>
+    <clipPath id="h-pd"><path d="M 155 232 L 181 232 L 183 358 L 161 358 Z"/></clipPath>
+    <radialGradient id="h-sol"><stop offset=".2" stop-color="#E39A52" stop-opacity=".85"/>
+      <stop offset="1" stop-color="#E39A52" stop-opacity=".1"/></radialGradient>
+  </defs>
+
+  <circle cx="192" cy="150" r="106" fill="none" stroke="#8D8274" stroke-width="1" opacity=".45"/>
+  <circle cx="266" cy="70" r="28" fill="url(#h-sol)"/>
+  <g fill="#D6C2A1">
+    <circle cx="34" cy="286" r="1.8"/><circle cx="48" cy="286" r="1.8"/><circle cx="62" cy="286" r="1.8"/>
+    <circle cx="34" cy="300" r="1.8"/><circle cx="48" cy="300" r="1.8"/><circle cx="62" cy="300" r="1.8"/>
+    <circle cx="34" cy="314" r="1.8"/><circle cx="48" cy="314" r="1.8"/><circle cx="62" cy="314" r="1.8"/>
+    <circle cx="34" cy="328" r="1.8"/><circle cx="48" cy="328" r="1.8"/><circle cx="62" cy="328" r="1.8"/>
+  </g>
+
+  <!-- Brazo trasero: baja MÁS ABAJO del torso para que se vea entero -->
+  <path d="M 126 162 L 110 210 L 116 256" fill="none" stroke="#D6C2A1"
+        stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 126 162 L 112 200" fill="none" stroke="#6E6F4B"
+        stroke-width="15" stroke-linecap="round"/>
+  <circle cx="116" cy="256" r="7" fill="#D6C2A1"/>
+
+  <!-- Piernas -->
+  <g clip-path="url(#h-pi)"><rect x="118" y="228" width="40" height="136" fill="#D6C2A1"/></g>
+  <g clip-path="url(#h-pd)"><rect x="150" y="228" width="40" height="136" fill="#8D8274"/></g>
+  <!-- Zapatos en oliva: en crema eran invisibles sobre el fondo -->
+  <path d="M 124 358 L 150 358 L 150 370 L 116 370 Q 116 358 124 358 Z" fill="#6E6F4B"/>
+  <path d="M 161 358 L 183 358 L 191 370 L 161 370 Z" fill="#6E6F4B"/>
+
+  <!-- Torso -->
+  <g clip-path="url(#h-torso)">
+    <rect x="114" y="134" width="76" height="106" fill="#D6C2A1"/>
+    <path d="M 188 168 L 188 240 L 116 240 Z" fill="#6E6F4B"/>
+    <path d="M 120 152 L 152 138 L 120 196 Z" fill="#E39A52"/>
+  </g>
+
+  <!-- Cuello y cabeza -->
+  <rect x="144" y="120" width="17" height="16" fill="#D6C2A1"/>
+  <ellipse cx="152" cy="104" rx="23" ry="25" fill="#D6C2A1"/>
+  <path d="M 129 104 A 23 25 0 0 1 175 104 Z" fill="#3A3B27"/>
+
+  <!-- Brazo del catalejo: piel entera, manga encima, mano en el extremo exacto -->
+  <path d="M 180 162 L 208 138 L 218 110" fill="none" stroke="#D6C2A1"
+        stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 180 162 L 205 141" fill="none" stroke="#6E6F4B"
+        stroke-width="16" stroke-linecap="round"/>
+  <circle cx="218" cy="110" r="8" fill="#D6C2A1"/>
+
+  <!-- Catalejo: arranca EN la mano -->
+  <path d="M 213 116 L 241 88 L 251 98 L 223 126 Z" fill="#E39A52"/>
+  <path d="M 239 86 L 257 68 L 269 80 L 251 98 Z" fill="#A3572B"/>
+
+  <!-- Brote -->
+  <path d="M 268 370 L 268 332" fill="none" stroke="#6E6F4B" stroke-width="1.8"/>
+  <path d="M 268 346 Q 250 342 248 326 Q 266 326 268 344 Z" fill="#6E6F4B"/>
+  <path d="M 268 338 Q 286 334 288 318 Q 270 318 268 336 Z" fill="#8D8274" opacity=".8"/>
+
+  <path d="M 16 370 L 324 370" stroke="#8D8274" stroke-width="1" opacity=".5"/>
+</svg>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -588,6 +677,38 @@
 
     <div class="keys reveal d2">
       <div class="key">
+        <div class="key-ilus"><svg class="ilus ilus-mini" viewBox="0 0 170 200" role="img"
+     aria-label="Figura geométrica mirando por un catalejo: exploración.">
+  <defs>
+    <clipPath id="e-t"><path d="M 58 72 Q 78 60 98 72 L 101 128 L 55 128 Z"/></clipPath>
+    <clipPath id="e-pi"><path d="M 58 128 L 76 128 L 75 174 L 60 174 Z"/></clipPath>
+    <clipPath id="e-pd"><path d="M 81 128 L 99 128 L 100 174 L 85 174 Z"/></clipPath>
+  </defs>
+  <circle cx="92" cy="74" r="56" fill="none" stroke="#8D8274" stroke-width="1" opacity=".4"/>
+  <path d="M 62 78 L 54 110 L 57 148" fill="none" stroke="#D6C2A1" stroke-width="10"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 62 78 L 56 102" fill="none" stroke="#6E6F4B" stroke-width="11" stroke-linecap="round"/>
+  <circle cx="57" cy="148" r="5" fill="#D6C2A1"/>
+  <g clip-path="url(#e-pi)"><rect x="54" y="126" width="26" height="52" fill="#D6C2A1"/></g>
+  <g clip-path="url(#e-pd)"><rect x="79" y="126" width="26" height="52" fill="#8D8274"/></g>
+  <path d="M 60 174 L 76 174 L 76 182 L 53 182 Q 53 174 60 174 Z" fill="#6E6F4B"/>
+  <path d="M 85 174 L 100 174 L 106 182 L 85 182 Z" fill="#6E6F4B"/>
+  <g clip-path="url(#e-t)">
+    <rect x="52" y="56" width="52" height="76" fill="#D6C2A1"/>
+    <path d="M 103 78 L 103 132 L 51 132 Z" fill="#6E6F4B"/>
+    <path d="M 54 74 L 76 62 L 54 96 Z" fill="#E39A52"/>
+  </g>
+  <rect x="71" y="48" width="11" height="14" fill="#D6C2A1"/>
+  <ellipse cx="76" cy="35" rx="16" ry="18" fill="#D6C2A1"/>
+  <path d="M 60 35 A 16 18 0 0 1 92 35 Z" fill="#3A3B27"/>
+  <path d="M 97 76 L 114 62 L 122 54" fill="none" stroke="#D6C2A1" stroke-width="10"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 97 76 L 110 65" fill="none" stroke="#6E6F4B" stroke-width="11" stroke-linecap="round"/>
+  <circle cx="122" cy="54" r="6" fill="#D6C2A1"/>
+  <path d="M 118 58 L 134 42 L 141 49 L 125 65 Z" fill="#E39A52"/>
+  <path d="M 133 41 L 145 29 L 153 37 L 141 49 Z" fill="#A3572B"/>
+  <path d="M 10 182 L 160 182" stroke="#8D8274" stroke-width="1" opacity=".45"/>
+</svg></div>
         <div>
           <h3>GitHub</h3>
           <p>Donde vive el c&oacute;digo del mundo. De ah&iacute; vas a descargar el proyecto que armamos,
@@ -598,6 +719,40 @@
       </div>
 
       <div class="key">
+        <div class="key-ilus"><svg class="ilus ilus-mini" viewBox="0 0 170 200" role="img"
+     aria-label="Figura geométrica sosteniendo un brote de planta en la mano: conexión.">
+  <defs>
+    <clipPath id="c-t"><path d="M 50 72 Q 70 60 90 72 L 93 128 L 47 128 Z"/></clipPath>
+    <clipPath id="c-pi"><path d="M 50 128 L 68 128 L 67 174 L 52 174 Z"/></clipPath>
+    <clipPath id="c-pd"><path d="M 73 128 L 91 128 L 92 174 L 77 174 Z"/></clipPath>
+  </defs>
+  <circle cx="70" cy="76" r="56" fill="none" stroke="#8D8274" stroke-width="1" opacity=".4"/>
+  <path d="M 54 78 L 46 110 L 49 148" fill="none" stroke="#D6C2A1" stroke-width="10"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 54 78 L 48 102" fill="none" stroke="#6E6F4B" stroke-width="11" stroke-linecap="round"/>
+  <circle cx="49" cy="148" r="5" fill="#D6C2A1"/>
+  <g clip-path="url(#c-pi)"><rect x="46" y="126" width="26" height="52" fill="#8D8274"/></g>
+  <g clip-path="url(#c-pd)"><rect x="71" y="126" width="26" height="52" fill="#D6C2A1"/></g>
+  <path d="M 52 174 L 68 174 L 68 182 L 45 182 Q 45 174 52 174 Z" fill="#6E6F4B"/>
+  <path d="M 77 174 L 92 174 L 98 182 L 77 182 Z" fill="#6E6F4B"/>
+  <g clip-path="url(#c-t)">
+    <rect x="44" y="56" width="52" height="76" fill="#D6C2A1"/>
+    <path d="M 44 84 L 95 132 L 44 132 Z" fill="#6E6F4B"/>
+    <path d="M 68 62 L 95 74 L 95 62 Z" fill="#E39A52"/>
+  </g>
+  <rect x="63" y="48" width="11" height="14" fill="#D6C2A1"/>
+  <ellipse cx="68" cy="35" rx="16" ry="18" fill="#D6C2A1"/>
+  <path d="M 52 35 A 16 18 0 0 1 84 35 Z" fill="#3A3B27"/>
+  <path d="M 89 78 L 106 92 L 116 100" fill="none" stroke="#D6C2A1" stroke-width="10"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 89 78 L 101 88" fill="none" stroke="#6E6F4B" stroke-width="11" stroke-linecap="round"/>
+  <circle cx="116" cy="100" r="6" fill="#D6C2A1"/>
+  <!-- El brote nace EN la mano -->
+  <path d="M 116 96 L 116 62" fill="none" stroke="#6E6F4B" stroke-width="1.8"/>
+  <path d="M 116 76 Q 102 72 100 58 Q 114 58 116 74 Z" fill="#6E6F4B"/>
+  <path d="M 116 70 Q 130 66 132 52 Q 118 52 116 68 Z" fill="#8D8274" opacity=".8"/>
+  <path d="M 10 182 L 160 182" stroke="#8D8274" stroke-width="1" opacity=".45"/>
+</svg></div>
         <div>
           <h3>Composio</h3>
           <p>El puente entre el agente y las aplicaciones que ya usas: correo, calendario,
@@ -607,6 +762,44 @@
       </div>
 
       <div class="key">
+        <div class="key-ilus"><svg class="ilus ilus-mini" viewBox="0 0 170 200" role="img"
+     aria-label="Figura geométrica apilando bloques que crecen en escalera: crecimiento.">
+  <defs>
+    <clipPath id="g-t"><path d="M 44 72 Q 64 60 84 72 L 87 128 L 41 128 Z"/></clipPath>
+    <clipPath id="g-pi"><path d="M 44 128 L 62 128 L 61 174 L 46 174 Z"/></clipPath>
+    <clipPath id="g-pd"><path d="M 67 128 L 85 128 L 86 174 L 71 174 Z"/></clipPath>
+  </defs>
+  <circle cx="106" cy="104" r="48" fill="none" stroke="#8D8274" stroke-width="1" opacity=".4"/>
+  <rect x="104" y="152" width="30" height="30" fill="#6E6F4B"/>
+  <rect x="110" y="126" width="24" height="26" fill="#D6C2A1"/>
+  <path d="M 112 126 L 124 106 L 136 126 Z" fill="#E39A52"/>
+  <path d="M 48 78 L 40 110 L 43 148" fill="none" stroke="#D6C2A1" stroke-width="10"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 48 78 L 42 102" fill="none" stroke="#6E6F4B" stroke-width="11" stroke-linecap="round"/>
+  <circle cx="43" cy="148" r="5" fill="#D6C2A1"/>
+  <g clip-path="url(#g-pi)"><rect x="40" y="126" width="26" height="52" fill="#D6C2A1"/></g>
+  <g clip-path="url(#g-pd)"><rect x="65" y="126" width="26" height="52" fill="#8D8274"/></g>
+  <path d="M 46 174 L 62 174 L 62 182 L 39 182 Q 39 174 46 174 Z" fill="#6E6F4B"/>
+  <path d="M 71 174 L 86 174 L 92 182 L 71 182 Z" fill="#6E6F4B"/>
+  <g clip-path="url(#g-t)">
+    <rect x="38" y="56" width="52" height="76" fill="#D6C2A1"/>
+    <path d="M 89 78 L 89 132 L 37 132 Z" fill="#6E6F4B"/>
+    <path d="M 40 72 L 62 62 L 40 94 Z" fill="#E39A52"/>
+  </g>
+  <rect x="57" y="48" width="11" height="14" fill="#D6C2A1"/>
+  <ellipse cx="62" cy="35" rx="16" ry="18" fill="#D6C2A1"/>
+  <path d="M 46 35 A 16 18 0 0 1 78 35 Z" fill="#3A3B27"/>
+  <path d="M 83 78 L 98 92 L 106 108" fill="none" stroke="#D6C2A1" stroke-width="10"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 83 78 L 95 89" fill="none" stroke="#6E6F4B" stroke-width="11" stroke-linecap="round"/>
+  <circle cx="106" cy="108" r="6" fill="#D6C2A1"/>
+  <g fill="#D6C2A1">
+    <circle cx="20" cy="140" r="1.7"/><circle cx="30" cy="140" r="1.7"/>
+    <circle cx="20" cy="150" r="1.7"/><circle cx="30" cy="150" r="1.7"/>
+    <circle cx="20" cy="160" r="1.7"/><circle cx="30" cy="160" r="1.7"/>
+  </g>
+  <path d="M 10 182 L 160 182" stroke="#8D8274" stroke-width="1" opacity=".45"/>
+</svg></div>
         <div>
           <h3>Monid</h3>
           <p>Le da acceso a datos del mundo real: informaci&oacute;n de empresas, de personas,
@@ -637,33 +830,33 @@
           </marker>
           <marker id="pt-hi" viewBox="0 0 10 10" refX="9" refY="5"
                   markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <polygon points="0,1 10,5 0,9" fill="#A8502E"></polygon>
+            <polygon points="0,1 10,5 0,9" fill="oklch(0.70 0.190 45)"></polygon>
           </marker>
         </defs>
 
         <rect x="16" y="50" width="190" height="86" fill="none" stroke="currentColor" stroke-width="1"></rect>
         <text x="111" y="80" text-anchor="middle" font-family="Archivo, sans-serif" font-size="13"
-              font-weight="700" fill="#362E25" letter-spacing="1.2">DIRECTIVA</text>
+              font-weight="700" fill="oklch(0.95 0.008 75)" letter-spacing="1.2">DIRECTIVA</text>
         <text x="111" y="100" text-anchor="middle" font-family="Archivo, sans-serif" font-size="11.5"
               fill="currentColor">El procedimiento escrito</text>
         <text x="111" y="120" text-anchor="middle" font-family="'Azeret Mono', monospace" font-size="10.5"
-              fill="#A8502E">directives/</text>
+              fill="oklch(0.70 0.190 45)">directives/</text>
 
-        <rect x="265" y="50" width="190" height="86" fill="none" stroke="#6E7147" stroke-width="1.8"></rect>
+        <rect x="265" y="50" width="190" height="86" fill="none" stroke="oklch(0.70 0.190 45)" stroke-width="1.5"></rect>
         <text x="360" y="80" text-anchor="middle" font-family="Archivo, sans-serif" font-size="13"
-              font-weight="700" fill="#362E25" letter-spacing="1.2">ORQUESTACI&#211;N</text>
+              font-weight="700" fill="oklch(0.95 0.008 75)" letter-spacing="1.2">ORQUESTACI&#211;N</text>
         <text x="360" y="100" text-anchor="middle" font-family="Archivo, sans-serif" font-size="11.5"
               fill="currentColor">El agente decide</text>
         <text x="360" y="120" text-anchor="middle" font-family="'Azeret Mono', monospace" font-size="10.5"
-              fill="#A8502E">Claude</text>
+              fill="oklch(0.70 0.190 45)">Claude</text>
 
         <rect x="514" y="50" width="190" height="86" fill="none" stroke="currentColor" stroke-width="1"></rect>
         <text x="609" y="80" text-anchor="middle" font-family="Archivo, sans-serif" font-size="13"
-              font-weight="700" fill="#362E25" letter-spacing="1.2">EJECUCI&#211;N</text>
+              font-weight="700" fill="oklch(0.95 0.008 75)" letter-spacing="1.2">EJECUCI&#211;N</text>
         <text x="609" y="100" text-anchor="middle" font-family="Archivo, sans-serif" font-size="11.5"
               fill="currentColor">Los programas hacen</text>
         <text x="609" y="120" text-anchor="middle" font-family="'Azeret Mono', monospace" font-size="10.5"
-              fill="#A8502E">execution/</text>
+              fill="oklch(0.70 0.190 45)">execution/</text>
 
         <line x1="212" y1="93" x2="255" y2="93" stroke="currentColor" stroke-width="1" marker-end="url(#pt)"></line>
         <text x="233" y="82" text-anchor="middle" font-family="'Azeret Mono', monospace" font-size="9.5"
@@ -678,13 +871,13 @@
         <text x="490" y="177" text-anchor="middle" font-family="'Azeret Mono', monospace" font-size="9.5"
               fill="currentColor">devuelve el error</text>
 
-        <path class="draw late" style="--len:440" d="M 320 136 L 320 228 L 100 228 L 100 140" fill="none" stroke="#A8502E"
+        <path class="draw late" style="--len:440" d="M 320 136 L 320 228 L 100 228 L 100 140" fill="none" stroke="oklch(0.70 0.190 45)"
               stroke-width="1.5" marker-end="url(#pt-hi)"></path>
         <text x="210" y="221" text-anchor="middle" font-family="'Azeret Mono', monospace" font-size="9.5"
-              fill="#A8502E">anota lo aprendido</text>
+              fill="oklch(0.70 0.190 45)">anota lo aprendido</text>
 
         <text x="360" y="258" text-anchor="middle" font-family="'Azeret Mono', monospace" font-size="9.5"
-              fill="#6E6155" letter-spacing="1.4">EL SISTEMA SE VUELVE M&#193;S CONFIABLE CON CADA VUELTA</text>
+              fill="oklch(0.56 0.014 60)" letter-spacing="1.4">EL SISTEMA SE VUELVE M&#193;S CONFIABLE CON CADA VUELTA</text>
       </svg>
       <figcaption>
         La flecha naranja es la que importa: cuando algo falla, el agente no solo lo arregla,

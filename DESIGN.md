@@ -1,67 +1,87 @@
 # DESIGN.md
 
-Sistema vigente: **CG — Experimentos Diseños, v1.0 (agosto 2026)**.
+Sistema vigente: **NATURA · Diseño con propósito, v1.0**.
 
-Este archivo ya no describe una propuesta propia. Los tokens de abajo son copia
-literal del sistema de la marca. Toda decisión visual sale de aquí; ningún color
-suelto en el código.
+Valores declarados: *diseño con sentido · claridad visual · armonía · conexión humana*.
 
-Valores declarados por el sistema: *diseño con sentido · claridad visual · calma ·
-respaldo humano*.
+Sustituye a la propuesta anterior. Todo color sale de una variable.
 
 ## Color
 
 ```
---cg-cream #F7F1E5   --cg-sand  #EFE4D2   --cg-beige #E8D9C1   --cg-white #FFFFFF
---cg-orange #E39A54  --cg-orange-soft #EDBB85  --cg-sienna #A8502E
---cg-olive  #6E7147  --cg-olive-soft  #9A9C6E  --cg-warm-gray #8C8175
---cg-ink    #362E25  --cg-ink-soft    #6E6155  --cg-line   #E2D6C1
+--na-cream  #F3EDE2   10%      --na-orange #E39A52   20%
+--na-sand   #D6C2A1   20%      --na-sienna #A3572B   20%
+--na-gray   #8D8274   10%      --na-olive  #6E6F4B   20%
 ```
 
-Proporciones de uso que fija el sistema: crema 44%, arena 18%, beige 14%,
-naranja 12%, oliva 8%, sienna 4%. El crema domina; el naranja y el sienna son
-acentos, no fondos.
+### Dos derivaciones obligatorias, medidas
 
-### Restricciones de contraste (medidas, no estimadas)
+**1. La paleta no trae color de texto.** Ninguno de los seis alcanza el mínimo
+AA de 4.5 sobre el crema:
 
-Estas dos reglas no están en el sistema pero se derivan de él y son obligatorias:
+| color | contraste sobre crema | veredicto |
+|---|---|---|
+| naranja `#E39A52` | 2.00 | no sirve como texto |
+| arena `#D6C2A1` | 1.49 | no sirve como texto |
+| gris `#8D8274` | 3.23 | solo texto grande |
+| oliva `#6E6F4B` | 4.46 | solo texto grande |
+| sienna `#A3572B` | 4.56 | pasa, justo |
 
-- **`--cg-orange` no se usa nunca como texto.** Da 2.07 sobre crema y 2.33 sobre
-  blanco, muy por debajo del mínimo AA de 4.5. Falla incluso en texto grande.
-  Su lugar es el relleno: botones, barras, marcas. El texto de acento va en
-  **sienna** (4.85 sobre crema). Sobre relleno naranja, el texto va en tinta (5.73).
-- **`--cg-warm-gray` solo cumple en texto grande** (3.39 sobre crema). Las
-  etiquetas pequeñas usan `--text-muted` (5.33).
+Se deriva **`--na-ink #2E2F1F`**, un oliva muy oscuro que respeta el matiz de la
+marca y da **11.68** sobre crema. El secundario es `#55563C` (6.48).
 
-Pares seguros de un vistazo: tinta/crema 11.86 · tinta-suave/crema 5.33 ·
-sienna/crema 4.85 · oliva/crema 4.54 · crema/sienna 4.85 · tinta/naranja 5.73.
+**2. El naranja nunca es texto.** Vive en rellenos, marcas e ilustración. El
+texto de acento va en sienna.
 
 ### Semántica
 
-Error y alerta en **sienna**. Éxito y confirmación en **oliva**. Acento y
-llamada a la acción en **naranja**. Nunca color solo: cada estado lleva también
-su palabra.
+Error en sienna, éxito en oliva, acento y llamada a la acción en naranja.
+Nunca color solo: cada estado lleva su palabra.
 
 ## Tipografía
 
-- **Títulos:** Newsreader SemiBold (600)
-- **Subtítulos y entradillas:** Newsreader Italic
-- **Cuerpo:** Hanken Grotesk Regular
-- **Código:** el sistema no define monoespaciada. Se usa la del sistema operativo
-  (`ui-monospace, SFMono-Regular, Menlo, Consolas`) en vez de importar una tercera
-  familia que compita con las dos de la marca.
+- **Títulos:** Montserrat SemiBold (600)
+- **Subtítulos:** Montserrat Medium (500)
+- **Cuerpo:** Lato Regular
+- **Código:** el sistema no define monoespaciada; se usa la del sistema operativo
+  en vez de importar una tercera familia que compita con las dos de la marca.
 
-## Forma y profundidad
+Montserrat no tiene rol de cursiva en este sistema: los subtítulos se distinguen
+por peso, no por inclinación.
+
+## Ilustración
+
+Figuras geométricas planas construidas con polígonos angulares en la paleta,
+sin contornos, cara sin rasgos. Motivos de apoyo: brote de dos hojas, círculo de
+contorno fino, rejilla de puntos, línea de horizonte, disco solar degradado.
+
+Tres estilos, como en el manual: **exploración** (catalejo), **conexión**
+(sostiene un brote), **crecimiento** (apila bloques).
+
+Hechas en SVG en línea, no como imágenes: escalan sin pérdida, pesan poco y
+toman el color de los mismos tokens.
+
+### Reglas de construcción aprendidas dibujándolas
+
+Estas tres salieron de ver fallar las primeras versiones:
+
+1. **Nunca crema sobre crema.** El fondo de página ES crema. Una manga o un
+   zapato en crema simplemente desaparece, y el brazo parece amputado con la
+   mano flotando. Las prendas claras van en **arena**; los zapatos en **oliva**.
+2. **La mano se centra en el punto final exacto del trazo del brazo**, y el
+   objeto arranca en ese mismo punto. Un par de píxeles de diferencia se lee
+   como una mano suelta en el aire.
+3. **El brazo trasero baja más abajo del borde del torso.** Si termina por
+   encima, el torso lo tapa y solo asoma una cuchilla puntiaguda.
+
+## Forma y movimiento
 
 Radios 6 / 12 / 20 / 32 / píldora. Sombras suaves en tres pasos.
 Transición `240ms cubic-bezier(.2,.6,.2,1)`.
 
 ## Reglas propias del proyecto
 
-- **Altura táctil mínima 44px**, fijada con `min-height`, no por suma de padding.
-  El público objetivo lee en celular.
-- **Tema único claro.** El sistema declara `color-scheme:light`; todo color se
-  pinta explícito, sin depender del tema del visor.
-- **Nada puede quedar invisible.** Lo que se revela al hacer scroll arranca en
-  opacidad cero; si `IntersectionObserver` no dispara, un temporizador de 2,5s
-  lo muestra igual.
+- **Altura táctil mínima 44px**, fijada con `min-height`.
+- **Tema único claro**, pintado explícito.
+- **Nada puede quedar invisible**: lo que se revela al hacer scroll tiene una red
+  de seguridad a los 2,5s por si `IntersectionObserver` no dispara.
