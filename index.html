@@ -269,6 +269,16 @@
     transform-origin: bottom; transform: scaleY(0); height: 100%; opacity: .26;
     transition: transform .55s var(--ease), opacity .3s var(--ease); }
   .plot .col.on .stalk { opacity: 1; }
+
+  /* La barra final lleva su valor encima: conecta el numero grande
+     con el grafico, que era lo que no se entendia. */
+  .plot .col { position: relative; }
+  .plot .val { position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+    font-family: var(--font-display); font-weight: 600; font-size: 13px;
+    color: var(--accent-strong); white-space: nowrap; opacity: 0;
+    transition: opacity .3s var(--ease); font-variant-numeric: tabular-nums; }
+  .plot .col.tip .val { opacity: 1; }
+  .plot { padding-top: 46px; }
   .axis { display: flex; gap: 3px; padding: 9px clamp(20px, 3vw, 30px) 24px;
     font-size: 10.5px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
   .axis span { flex: 1; text-align: center; min-width: 0; }
@@ -788,6 +798,27 @@ Tú estás entre la intención humana (directivas) y la ejecución determinista 
 Se pragmático. Se confiable. Auto-corríjete.</pre>
     </div>
 
+    <div class="vault reveal d2" style="margin-top:26px">
+      <div class="vault-top">
+        <span>Para que no te pida permiso a cada rato</span>
+        <button class="copy" id="cp2">Copiar</button>
+      </div>
+      <pre id="perm">Crea la carpeta .claude dentro de este proyecto y guarda adentro, con el nombre settings.json, el archivo que est&#225; en esta direcci&#243;n:
+https://raw.githubusercontent.com/DjmartinG/agentes-multi-agosto-2026/main/plantillas/settings-clase.json</pre>
+    </div>
+
+    <p class="sub reveal d2" style="margin-top:20px; max-width:62ch">
+      Claude pregunta antes de cada acci&#243;n, y con raz&#243;n. Pero en una clase de una hora
+      eso significa pasarla haciendo clic en "permitir" en vez de mirando lo que pasa.
+      Ese texto le deja preaprobado lo que necesita para el ejercicio, y le prohibe lo que
+      nunca deber&#237;a hacer: borrados masivos, apagar el equipo, leer tus contrase&#241;as,
+      descargar y ejecutar cosas de internet.
+    </p>
+    <p class="sub reveal d2" style="margin-top:12px; max-width:62ch">
+      Los permisos valen <em>solo dentro de esa carpeta</em>. En el resto de tu computador
+      Claude te sigue preguntando todo, como debe ser.
+    </p>
+
     <a class="link ghost" href="https://github.com/DjmartinG/agentes-multi-agosto-2026" target="_blank" rel="noopener">Ver el proyecto completo en GitHub</a>
   </div>
 </section>
@@ -938,6 +969,10 @@ Se pragmático. Se confiable. Auto-corríjete.</pre>
     s.className = 'stalk';
     s.style.transitionDelay = (i * 32) + 'ms';
     col.appendChild(s);
+    var v = document.createElement('span');
+    v.className = 'val';
+    v.textContent = Math.round(Math.pow(ACIERTO, i) * 100) + '%';
+    col.appendChild(v);
     plot.appendChild(col);
     stalks.push({ col: col, bar: s, p: Math.pow(ACIERTO, i) });
 
@@ -974,6 +1009,9 @@ Se pragmático. Se confiable. Auto-corríjete.</pre>
     previo = p;
     stalks.forEach(function (o, idx) {
       o.col.classList.toggle('on', idx < n);
+      // Solo la ultima barra encendida muestra su valor: es la que
+      // corresponde al numero grande.
+      o.col.classList.toggle('tip', idx === n - 1);
       ticks[idx].classList.toggle('on', idx < n);
     });
   }
