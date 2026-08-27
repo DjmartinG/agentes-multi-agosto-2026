@@ -1,0 +1,648 @@
+<title>Ponla a Trabajar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Azeret+Mono:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --pitch:   oklch(0.13 0.010 55);
+    --void:    oklch(0.17 0.013 55);
+    --raise:   oklch(0.22 0.015 55);
+    --line:    oklch(0.32 0.018 55);
+    --bone:    oklch(0.95 0.008 75);
+    --dim:     oklch(0.72 0.014 65);
+    --faint:   oklch(0.56 0.014 60);
+    --hi:      oklch(0.70 0.190 45);
+    --hi-deep: oklch(0.56 0.165 42);
+    --ease:    cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--void);
+    color: var(--bone);
+    font-family: "Archivo", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-variation-settings: "wdth" 100, "wght" 400;
+    font-size: 17px;
+    line-height: 1.68;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .frame { max-width: 940px; margin: 0 auto; padding: 0 clamp(18px, 5vw, 44px); }
+
+  .mono {
+    font-family: "Azeret Mono", ui-monospace, "SFMono-Regular", monospace;
+    font-variation-settings: normal;
+  }
+
+  .kicker {
+    font-family: "Azeret Mono", ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--hi);
+    margin: 0;
+  }
+
+  /* ========== HERO ========== */
+  .hero {
+    background: var(--pitch);
+    border-bottom: 1px solid var(--line);
+    padding: clamp(52px, 11vw, 104px) 0 clamp(40px, 7vw, 68px);
+  }
+
+  .hero h1 {
+    font-variation-settings: "wdth" 118, "wght" 800;
+    font-size: clamp(1.95rem, 8.2vw, 5.3rem);
+    line-height: 1.0;
+    letter-spacing: -.032em;
+    text-transform: uppercase;
+    margin: 26px 0 0;
+    text-wrap: balance;
+  }
+  .hero h1 .off { color: var(--faint); display: block; }
+  .hero h1 .on  { color: var(--hi); display: block; }
+
+  /* En pantallas angostas los saltos forzados no caben en ningun telefono real
+     (360px de Android parte "No vamos a hablar"). Dejamos que el titular fluya:
+     el corte de color sigue separando las dos frases. */
+  @media (max-width: 560px) {
+    .hero h1 {
+      font-variation-settings: "wdth" 100, "wght" 800;
+      font-size: clamp(1.72rem, 7.4vw, 2.6rem);
+      letter-spacing: -.024em;
+      line-height: 1.06;
+    }
+    .hero h1 .off, .hero h1 .on { display: inline; }
+  }
+
+  .hero .lede {
+    max-width: 46ch;
+    color: var(--dim);
+    font-size: clamp(1.02rem, 2.2vw, 1.2rem);
+    margin: 28px 0 0;
+  }
+
+  .slate {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+    border: 1px solid var(--line);
+    margin-top: 42px;
+    background: var(--void);
+  }
+  .slate div { padding: 15px 18px; border-right: 1px solid var(--line); }
+  .slate div:last-child { border-right: 0; }
+  @media (max-width: 620px) {
+    .slate { grid-template-columns: 1fr; }
+    .slate div { border-right: 0; border-bottom: 1px solid var(--line); }
+    .slate div:last-child { border-bottom: 0; }
+  }
+  .slate dt {
+    font-family: "Azeret Mono", monospace;
+    font-size: 10px; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--faint); margin: 0 0 6px;
+  }
+  .slate dd {
+    margin: 0; font-variation-settings: "wdth" 110, "wght" 600;
+    font-size: 1.02rem; font-variant-numeric: tabular-nums; line-height: 1.3;
+  }
+  .slate dd b { display: block; font-weight: 400; font-size: .82rem; color: var(--dim);
+    font-variation-settings: "wdth" 100, "wght" 400; margin-top: 2px; }
+
+  /* ========== SECCIONES ========== */
+  section { padding: clamp(52px, 9vw, 92px) 0; border-bottom: 1px solid var(--line); }
+
+  h2 {
+    font-variation-settings: "wdth" 112, "wght" 750;
+    font-size: clamp(1.7rem, 4.4vw, 2.6rem);
+    line-height: 1.08; letter-spacing: -.022em; text-transform: uppercase;
+    margin: 14px 0 0; text-wrap: balance;
+  }
+  .sub { color: var(--dim); max-width: 58ch; margin: 16px 0 0; }
+
+  /* ========== PROGRESO ========== */
+  .gauge { margin-top: 38px; }
+  .gauge-top {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: "Azeret Mono", monospace; font-size: 11px;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--faint);
+    margin-bottom: 9px;
+  }
+  .gauge-top span:last-child { color: var(--hi); font-variant-numeric: tabular-nums; }
+  .bar { height: 3px; background: var(--raise); overflow: hidden; }
+  .bar i { display: block; height: 100%; width: 0; background: var(--hi);
+    transition: width .7s var(--ease); }
+
+  /* ========== ESTACIONES ========== */
+  .stations { margin-top: 12px; border-top: 1px solid var(--line); }
+
+  .st {
+    display: grid;
+    grid-template-columns: 62px 1fr;
+    border-bottom: 1px solid var(--line);
+    align-items: start;
+  }
+  @media (max-width: 560px) { .st { grid-template-columns: 44px 1fr; } }
+
+  .st-n {
+    padding: 30px 0 0;
+    font-family: "Azeret Mono", monospace;
+    font-size: 12px; font-weight: 600; color: var(--faint);
+    font-variant-numeric: tabular-nums;
+  }
+  .st-b { padding: 28px 0 32px; min-width: 0; }
+
+  .st h3 {
+    font-variation-settings: "wdth" 108, "wght" 700;
+    font-size: clamp(1.16rem, 2.8vw, 1.5rem);
+    letter-spacing: -.014em; margin: 0; line-height: 1.2;
+  }
+  .st-tag {
+    font-family: "Azeret Mono", monospace; font-size: 10.5px;
+    letter-spacing: .13em; text-transform: uppercase; color: var(--faint);
+    margin: 0 0 8px;
+  }
+  .st-tag em { font-style: normal; color: var(--hi); }
+  .st p { color: var(--dim); margin: 12px 0 0; font-size: .98rem; max-width: 62ch; }
+  .st p strong { color: var(--bone); font-weight: 600; }
+
+  .done { border: 1px solid var(--line); background: transparent; color: var(--faint);
+    font-family: "Azeret Mono", monospace; font-size: 10.5px; letter-spacing: .12em;
+    text-transform: uppercase; padding: 8px 13px; cursor: pointer; margin-top: 18px;
+    transition: color .25s var(--ease), border-color .25s var(--ease), background .25s var(--ease); }
+  .done:hover { color: var(--bone); border-color: var(--dim); }
+  .done[aria-pressed="true"] { background: var(--hi); border-color: var(--hi); color: var(--pitch); font-weight: 600; }
+  .done:focus-visible { outline: 2px solid var(--hi); outline-offset: 3px; }
+
+  .link {
+    display: inline-block; margin-top: 16px;
+    font-family: "Azeret Mono", monospace; font-size: 12.5px;
+    color: var(--pitch); background: var(--hi); text-decoration: none;
+    padding: 11px 17px; font-weight: 600;
+    transition: background .25s var(--ease);
+  }
+  .link:hover { background: var(--bone); }
+  .link:focus-visible { outline: 2px solid var(--bone); outline-offset: 3px; }
+  .link.ghost { background: transparent; color: var(--hi); border: 1px solid var(--hi); }
+  .link.ghost:hover { background: var(--hi); color: var(--pitch); }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line);
+    border: 1px solid var(--line); margin-top: 20px; }
+  @media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+  .split > div { background: var(--void); padding: 16px 18px; }
+  .split h4 { font-family: "Azeret Mono", monospace; font-size: 10.5px; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--hi); margin: 0 0 8px; }
+  .split p { margin: 0; font-size: .92rem; }
+
+  /* ========== PRUEBA ========== */
+  .proof { background: var(--pitch); border: 1px solid var(--hi); padding: clamp(24px, 4vw, 34px); margin-top: 40px; }
+  .proof h3 { font-variation-settings: "wdth" 110, "wght" 750; font-size: 1.3rem;
+    text-transform: uppercase; letter-spacing: -.01em; margin: 0 0 12px; }
+  .proof p { color: var(--dim); margin: 0 0 14px; }
+  .proof p:last-child { margin-bottom: 0; }
+  .say { font-family: "Azeret Mono", monospace; font-size: .92rem; line-height: 1.6;
+    background: var(--void); border: 1px solid var(--line); padding: 15px 17px;
+    color: var(--bone); overflow-x: auto; }
+
+  /* ========== DIAGRAMA ========== */
+  figure { margin: 34px 0 0; }
+  figure svg { width: 100%; height: auto; display: block; color: var(--dim); }
+  figcaption { font-size: .88rem; color: var(--faint); margin-top: 14px; max-width: 62ch; }
+
+  /* ========== PROMPT ========== */
+  .vault { border: 1px solid var(--line); margin-top: 32px; background: var(--pitch); }
+  .vault-top { display: flex; justify-content: space-between; align-items: center; gap: 14px;
+    padding: 13px 16px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .vault-top span { font-family: "Azeret Mono", monospace; font-size: 10.5px;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
+  .copy { font-family: "Azeret Mono", monospace; font-size: 11px; letter-spacing: .1em;
+    text-transform: uppercase; background: var(--hi); color: var(--pitch); border: 0;
+    padding: 9px 15px; cursor: pointer; font-weight: 600; transition: background .25s var(--ease); }
+  .copy:hover { background: var(--bone); }
+  .copy:focus-visible { outline: 2px solid var(--bone); outline-offset: 3px; }
+  pre { margin: 0; padding: 18px; max-height: 300px; overflow: auto;
+    font-family: "Azeret Mono", monospace; font-size: 12px; line-height: 1.72;
+    color: var(--dim); white-space: pre-wrap; word-break: break-word; }
+
+  /* ========== AGENDA ========== */
+  .run { margin-top: 34px; border-top: 1px solid var(--line); }
+  .run div { display: grid; grid-template-columns: 92px 1fr; gap: 20px;
+    padding: 22px 0; border-bottom: 1px solid var(--line); align-items: start; }
+  @media (max-width: 560px) { .run div { grid-template-columns: 72px 1fr; gap: 14px; } }
+  .run time { font-family: "Azeret Mono", monospace; font-size: 12px; color: var(--hi);
+    font-variant-numeric: tabular-nums; padding-top: 3px; }
+  .run h4 { margin: 0 0 5px; font-variation-settings: "wdth" 106, "wght" 700;
+    font-size: 1.06rem; letter-spacing: -.008em; }
+  .run p { margin: 0; color: var(--dim); font-size: .95rem; }
+
+  /* ========== CIERRE ========== */
+  .last { border-bottom: 0; }
+  footer { background: var(--pitch); border-top: 1px solid var(--line);
+    padding: 30px 0 46px; color: var(--faint); font-size: .84rem; }
+  footer p { margin: 0 0 5px; }
+
+  /* ========== ENTRADA ========== */
+  .rise { opacity: 0; transform: translateY(14px); animation: rise .9s var(--ease) forwards; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .rise { animation: none; opacity: 1; transform: none; }
+    .bar i { transition: none; }
+  }
+</style>
+
+<div class="hero">
+  <div class="frame">
+    <p class="kicker rise" style="animation-delay:.05s">Domingo 30 de agosto · 10:00 a.m. · Manizales</p>
+    <h1 class="rise" style="animation-delay:.13s">
+      <span class="off">No vamos a hablar</span>
+      <span class="off">con una IA.</span>
+      <span class="on">La vamos a poner</span>
+      <span class="on">a trabajar.</span>
+    </h1>
+    <p class="lede rise" style="animation-delay:.24s">
+      Una hora, en vivo. Vas a ver un agente crear archivos, escribir programas,
+      ejecutarlos, equivocarse, corregirse solo y dejar anotado lo que aprendió.
+      Para que la hora rinda, hay tres cosas que hacer antes.
+    </p>
+
+    <dl class="slate rise" style="animation-delay:.34s">
+      <div><dt>Cuándo</dt><dd>Dom 30 ago<b>10:00 a 11:00 a.m.</b></dd></div>
+      <div><dt>Dónde</dt><dd>Teams<b>Enlace en tu invitación</b></dd></div>
+      <div><dt>Prepararse toma</dt><dd>25 min<b>Una sola vez</b></dd></div>
+      <div><dt>Plazo</dt><dd>Sábado 29<b>No el domingo</b></dd></div>
+    </dl>
+  </div>
+</div>
+
+<section>
+  <div class="frame">
+    <p class="kicker">Antes de llegar</p>
+    <h2>Tres cosas, en este orden</h2>
+    <p class="sub">
+      Si llegamos a instalar en vivo se nos va la hora entera en eso. Hazlo con calma
+      cualquier día de esta semana, no el domingo a las 9:55.
+    </p>
+
+    <div class="gauge">
+      <div class="gauge-top"><span>Tu avance</span><span id="tally">0 de 3</span></div>
+      <div class="bar"><i id="fill"></i></div>
+    </div>
+
+    <div class="stations">
+
+      <div class="st">
+        <div class="st-n">01</div>
+        <div class="st-b">
+          <p class="st-tag">5 minutos · <em>gratis</em></p>
+          <h3>Crea tu cuenta de Claude</h3>
+          <p>Si ya tienes una, sáltate esto y pasa al 02.</p>
+          <a class="link" href="https://claude.ai" target="_blank" rel="noopener">Ir a claude.ai</a><br>
+          <button class="done" data-k="a" aria-pressed="false">Marcar como listo</button>
+        </div>
+      </div>
+
+      <div class="st">
+        <div class="st-n">02</div>
+        <div class="st-b">
+          <p class="st-tag">5 minutos · <em>USD $20 al mes</em></p>
+          <h3>Sube tu cuenta al plan Pro</h3>
+          <p>
+            Te lo digo de frente y con tiempo: <strong>la herramienta que vamos a usar no
+            viene en el plan gratuito.</strong> Necesita Pro, que vale USD $20 al mes
+            (o $17 si pagas anual) y se cancela cuando quieras.
+          </p>
+          <p>
+            <strong>¿Es obligatorio para asistir? No.</strong> Yo voy a ejecutar todo en
+            pantalla compartida y la clase se sigue completa sin pagar nada. Pero si
+            quieres hacerlo en tu propio computador mientras avanzamos, y te lo recomiendo
+            porque se entiende diez veces mejor haciéndolo, necesitas el Pro activo antes
+            del domingo.
+          </p>
+          <p>En claude.ai, abre tu perfil abajo a la izquierda y elige <strong>Upgrade</strong>.</p>
+          <button class="done" data-k="b" aria-pressed="false">Marcar como listo</button>
+        </div>
+      </div>
+
+      <div class="st">
+        <div class="st-n">03</div>
+        <div class="st-b">
+          <p class="st-tag">10 minutos · <em>gratis</em></p>
+          <h3>Instala la aplicación de escritorio</h3>
+          <p>
+            Esta es la que convierte a Claude en algo que <strong>hace cosas</strong> en tu
+            computador, no que solo responde. No necesitas saber programar ni escribir
+            comandos: tiene ventanas y botones como cualquier programa.
+          </p>
+          <div class="split">
+            <div>
+              <h4>Windows</h4>
+              <p>Descarga el instalador y ábrelo. Si aparece un aviso azul de seguridad, elige
+              "Más información" y luego "Ejecutar de todas formas".</p>
+            </div>
+            <div>
+              <h4>Mac</h4>
+              <p>Descarga el archivo, ábrelo y arrastra Claude a la carpeta Aplicaciones. La
+              primera vez ábrelo con clic derecho y luego Abrir.</p>
+            </div>
+          </div>
+          <a class="link" href="https://claude.com/download" target="_blank" rel="noopener">Descargar la app</a><br>
+          <button class="done" data-k="c" aria-pressed="false">Marcar como listo</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="proof">
+      <h3>La prueba de los 30 segundos</h3>
+      <p>Hazla el sábado. Si esto funciona, estás listo y no tienes que hacer nada más.
+      Abre la app de Claude, inicia sesión y escríbele exactamente esto:</p>
+      <p class="say">Crea un archivo que se llame listo.txt y escribe adentro la palabra funciona</p>
+      <p>
+        <strong>Si te responde que creó el archivo, ya está.</strong> Eso es justamente lo
+        que no puede hacer un chat normal, y es de lo que se trata la clase. Si te pide
+        permiso para escribir en tu computador, dile que sí: así debe ser.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="frame">
+    <p class="kicker">El método</p>
+    <h2>Por qué la IA te falla en tareas largas</h2>
+    <p class="sub">
+      Si un agente acierta el 90% en cada paso, en cinco pasos acierta el 59% de las veces.
+      Esa cuenta explica casi toda la frustración que has sentido con la inteligencia
+      artificial. La salida no es un modelo más inteligente. Es separar el trabajo en tres capas.
+    </p>
+
+    <figure>
+      <svg viewBox="0 0 720 272" role="img"
+           aria-label="Las tres capas: la directiva es leída por la orquestación, que llama a la ejecución. La ejecución devuelve los errores a la orquestación, y la orquestación anota lo aprendido de vuelta en la directiva.">
+        <defs>
+          <marker id="pt" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <polygon points="0,1 10,5 0,9" fill="currentColor"></polygon>
+          </marker>
+          <marker id="pt-hi" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <polygon points="0,1 10,5 0,9" fill="oklch(0.70 0.190 45)"></polygon>
+          </marker>
+        </defs>
+
+        <!-- Capa 1 -->
+        <rect x="16" y="50" width="190" height="86" fill="none" stroke="currentColor" stroke-width="1"></rect>
+        <text x="111" y="80" text-anchor="middle" font-family="Archivo, sans-serif" font-size="13"
+              font-weight="700" fill="oklch(0.95 0.008 75)" letter-spacing="1.2">DIRECTIVA</text>
+        <text x="111" y="100" text-anchor="middle" font-family="Archivo, sans-serif" font-size="11.5"
+              fill="currentColor">El procedimiento escrito</text>
+        <text x="111" y="120" text-anchor="middle" font-family="'Azeret Mono', monospace" font-size="10.5"
+              fill="oklch(0.70 0.190 45)">directives/</text>
+
+        <!-- Capa 2 -->
+        <rect x="265" y="50" width="190" height="86" fill="none" stroke="oklch(0.70 0.190 45)" stroke-width="1.5"></rect>
+        <text x="360" y="80" text-anchor="middle" font-family="Archivo, sans-serif" font-size="13"
+              font-weight="700" fill="oklch(0.95 0.008 75)" letter-spacing="1.2">ORQUESTACIÓN</text>
+        <text x="360" y="100" text-anchor="middle" font-family="Archivo, sans-serif" font-size="11.5"
+              fill="currentColor">El agente decide</text>
+        <text x="360" y="120" text-anchor="middle" font-family="'Azeret Mono', monospace" font-size="10.5"
+              fill="oklch(0.70 0.190 45)">Claude</text>
+
+        <!-- Capa 3 -->
+        <rect x="514" y="50" width="190" height="86" fill="none" stroke="currentColor" stroke-width="1"></rect>
+        <text x="609" y="80" text-anchor="middle" font-family="Archivo, sans-serif" font-size="13"
+              font-weight="700" fill="oklch(0.95 0.008 75)" letter-spacing="1.2">EJECUCIÓN</text>
+        <text x="609" y="100" text-anchor="middle" font-family="Archivo, sans-serif" font-size="11.5"
+              fill="currentColor">Los programas hacen</text>
+        <text x="609" y="120" text-anchor="middle" font-family="'Azeret Mono', monospace" font-size="10.5"
+              fill="oklch(0.70 0.190 45)">execution/</text>
+
+        <!-- Flujo directo -->
+        <line x1="212" y1="93" x2="255" y2="93" stroke="currentColor" stroke-width="1" marker-end="url(#pt)"></line>
+        <text x="233" y="82" text-anchor="middle" font-family="'Azeret Mono', monospace" font-size="9.5"
+              fill="currentColor">lee</text>
+
+        <line x1="461" y1="93" x2="504" y2="93" stroke="currentColor" stroke-width="1" marker-end="url(#pt)"></line>
+        <text x="482" y="82" text-anchor="middle" font-family="'Azeret Mono', monospace" font-size="9.5"
+              fill="currentColor">llama</text>
+
+        <!-- Retorno: error -->
+        <path d="M 600 136 L 600 184 L 380 184 L 380 140" fill="none" stroke="currentColor"
+              stroke-width="1" stroke-dasharray="4 3" marker-end="url(#pt)"></path>
+        <text x="490" y="177" text-anchor="middle" font-family="'Azeret Mono', monospace" font-size="9.5"
+              fill="currentColor">devuelve el error</text>
+
+        <!-- Retorno: aprendizaje -->
+        <path d="M 320 136 L 320 228 L 100 228 L 100 140" fill="none" stroke="oklch(0.70 0.190 45)"
+              stroke-width="1.5" marker-end="url(#pt-hi)"></path>
+        <text x="210" y="221" text-anchor="middle" font-family="'Azeret Mono', monospace" font-size="9.5"
+              fill="oklch(0.70 0.190 45)">anota lo aprendido</text>
+
+        <text x="360" y="258" text-anchor="middle" font-family="'Azeret Mono', monospace" font-size="9.5"
+              fill="oklch(0.56 0.014 60)" letter-spacing="1.4">EL SISTEMA SE VUELVE MÁS CONFIABLE CON CADA VUELTA</text>
+      </svg>
+      <figcaption>
+        La flecha naranja es la que importa: cuando algo falla, el agente no solo lo arregla,
+        sino que escribe lo que aprendió de vuelta en el procedimiento. La próxima vez ya
+        no se equivoca ahí.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="frame">
+    <p class="kicker">Tu regalo de la clase</p>
+    <h2>El sistema completo, para que lo uses</h2>
+    <p class="sub">
+      Este es el texto que le vas a pegar a Claude para que te construya todo el andamiaje
+      solo: las carpetas, los archivos de instrucciones y la memoria donde va guardando lo
+      que aprende. No hace falta que lo entiendas hoy. Guárdalo.
+    </p>
+
+    <div class="vault">
+      <div class="vault-top">
+        <span>Prompt DOE · pégalo en Claude</span>
+        <button class="copy" id="cp">Copiar</button>
+      </div>
+      <pre id="doe">Crea un archivo CLAUDE.md, AGENTS.md y GEMINI.md con todo el contenido de este prompt, y crea la estructura de carpetas indicada más abajo. Los tres archivos deben quedar siempre idénticos: si cambias algo o registras un aprendizaje en uno, replícalo en los otros dos para que el sistema cargue igual en cualquier entorno de IA.
+
+## Aprendizajes del Agente (Mejora Continua)
+
+Esta sección es tu memoria persistente. Con cada ciclo de ejecución (al completar una tarea, resolver un error, descubrir un patrón o ajustar un flujo) agrega aquí un aprendizaje nuevo si surgió algo no trivial.
+
+Qué registrar: restricciones de APIs descubiertas, límites reales, patrones que funcionan, errores que se repiten, decisiones tomadas con el usuario, supuestos que resultaron falsos, gotchas del entorno.
+
+Qué NO registrar: detalles efímeros de una sola tarea, cosas ya documentadas en la directiva, trivialidades derivables del código.
+
+Formato: - **AAAA-MM-DD — [Tema corto]:** Descripción en 1 a 3 líneas. **Por qué importa:** consecuencia práctica.
+
+Higiene: si un aprendizaje queda obsoleto, actualízalo o elimínalo en vez de acumular ruido. Más recientes arriba.
+
+### Registro de aprendizajes
+
+---
+
+Operas dentro de una arquitectura de 3 capas que separa responsabilidades para maximizar la confiabilidad. Los LLM son probabilísticos, pero la mayoría de la lógica de negocio es determinista. Este sistema resuelve esa incompatibilidad.
+
+## La Arquitectura de 3 Capas
+
+**Capa 1: Directiva (qué hacer).** Procedimientos escritos en Markdown, en `directives/`. Definen objetivos, entradas, herramientas a usar, salidas y casos extremos. Lenguaje natural, como se lo darías a un empleado de nivel medio.
+
+**Capa 2: Orquestación (decidir).** Esta es tu función: enrutamiento inteligente. Leer directivas, llamar herramientas en el orden correcto, manejar errores, pedir aclaraciones, actualizar directivas con lo aprendido. Eres el puente entre la intención y la ejecución. No hagas el trabajo pesado por tu cuenta: lee la directiva y ejecuta el script correspondiente.
+
+**Capa 3: Ejecución (hacer).** Scripts de Python deterministas en `execution/`. Variables de entorno y claves en `.env`. Manejan llamadas a APIs, procesamiento de datos y operaciones de archivos. Confiables, testeables, rápidos.
+
+**Por qué funciona:** si haces todo por tu cuenta, los errores se acumulan. Un 90% de precisión por paso da 59% de éxito en 5 pasos. La solución es empujar la complejidad hacia código determinista, para que tú te concentres solo en decidir.
+
+## Principios de Operación
+
+1. **Revisa primero si ya existe la herramienta.** Antes de escribir un script, mira `execution/`. Crea uno nuevo solo si no existe.
+
+2. **Auto-corrección cuando algo falla.** Lee el error y el stack trace. Corrige el script y pruébalo de nuevo (salvo que consuma créditos de pago: ahí consulta primero). Actualiza la directiva con lo aprendido.
+
+3. **Actualiza las directivas a medida que aprendes.** Son documentos vivos. Pero no crees ni sobreescribas directivas sin preguntar, salvo indicación explícita.
+
+## Ciclo de Auto-corrección
+
+1. Corrige el problema. 2. Actualiza la herramienta. 3. Pruébala. 4. Actualiza la directiva. 5. El sistema es ahora más robusto.
+
+## Organización de Archivos
+
+- `.tmp/` Archivos intermedios. Nunca se versionan, siempre se regeneran.
+- `execution/` Scripts de Python.
+- `directives/` Procedimientos en Markdown.
+- `.env` Variables de entorno y claves de API.
+
+**Principio clave:** los intermedios viven en `.tmp/` y pueden borrarse siempre. Cualquier salida debe ser reproducible ejecutando el flujo de nuevo, nunca editada a mano.
+
+Sé pragmático. Sé confiable. Auto-corrígete.</pre>
+    </div>
+
+    <a class="link ghost" href="https://github.com/DjmartinG/agentes-multi-agosto-2026" target="_blank" rel="noopener">Ver el proyecto completo en GitHub</a>
+  </div>
+</section>
+
+<section>
+  <div class="frame">
+    <p class="kicker">La hora</p>
+    <h2>Qué va a pasar el domingo</h2>
+
+    <div class="run">
+      <div>
+        <time>9:30</time>
+        <div>
+          <h4>Sala de auxilio</h4>
+          <p>Abro media hora antes por si algo no te quedó instalado. Opcional. Peor que llegar sin instalar es no llegar.</p>
+        </div>
+      </div>
+      <div>
+        <time>10:00</time>
+        <div>
+          <h4>La cuenta del 59%</h4>
+          <p>Cinco minutos. Por qué la IA te falla en lo largo, y qué hacer al respecto.</p>
+        </div>
+      </div>
+      <div>
+        <time>10:05</time>
+        <div>
+          <h4>De conversar a ejecutar</h4>
+          <p>En vivo: un agente que crea carpetas, escribe un programa y lo corre. Sin trucos de edición.</p>
+        </div>
+      </div>
+      <div>
+        <time>10:30</time>
+        <div>
+          <h4>El agente se corrige solo</h4>
+          <p>Voy a dejar que falle a propósito. Lo interesante es lo que hace después.</p>
+        </div>
+      </div>
+      <div>
+        <time>10:45</time>
+        <div>
+          <h4>Sale de tu computador</h4>
+          <p>Conectamos herramientas reales en vivo y le pedimos datos del mundo. Aquí no te adelanto nada.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="last">
+  <div class="frame">
+    <p class="kicker">Si algo se traba</p>
+    <h2>Escríbeme, no te quedes callado</h2>
+    <p class="sub">
+      Es normal que algo no salga a la primera. Cuéntame qué paso ibas haciendo y qué te
+      apareció en pantalla. Una captura de pantalla es lo más útil de todo. Lo resolvemos
+      por chat durante la semana, sin apuros.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="frame">
+    <p>Clase IA · Domingo 30 de agosto de 2026, 10:00 a.m. hora de Colombia · Microsoft Teams.</p>
+    <p>El precio de Claude Pro es el publicado por Anthropic a la fecha de este documento.</p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var KEY = 'kit-clase-ia-v1';
+    var btns = Array.prototype.slice.call(document.querySelectorAll('.done'));
+    var fill = document.getElementById('fill');
+    var tally = document.getElementById('tally');
+    var state = {};
+
+    try {
+      var raw = localStorage.getItem(KEY);
+      if (raw) { state = JSON.parse(raw) || {}; }
+    } catch (e) { state = {}; }
+
+    function paint() {
+      var n = 0;
+      btns.forEach(function (b) {
+        var on = !!state[b.dataset.k];
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        b.textContent = on ? 'Listo' : 'Marcar como listo';
+        if (on) { n++; }
+      });
+      fill.style.width = (n / btns.length * 100) + '%';
+      tally.textContent = n + ' de ' + btns.length;
+    }
+
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        state[b.dataset.k] = !state[b.dataset.k];
+        try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+        paint();
+      });
+    });
+
+    paint();
+
+    var cp = document.getElementById('cp');
+    cp.addEventListener('click', function () {
+      var text = document.getElementById('doe').textContent;
+      function ok() { cp.textContent = 'Copiado'; setTimeout(function () { cp.textContent = 'Copiar'; }, 2200); }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(ok, fallback);
+      } else { fallback(); }
+      function fallback() {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); ok(); }
+        catch (e) { cp.textContent = 'Selecciona y copia'; }
+        document.body.removeChild(ta);
+      }
+    });
+  })();
+</script>
